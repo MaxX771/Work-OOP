@@ -27,7 +27,14 @@ class Student:
 
     def __str__(self):
         return f'\nИмя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашние задания: {self._average_s()}' \
-        f'\nКурсы в процессе изучения: {", ".join(self.courses_in_progress)}\nЗавершенные курсы: {self.finished_courses[0]}'
+               f'\nКурсы в процессе изучения: {", ".join(self.courses_in_progress)}\nЗавершенные курсы: {self.finished_courses[0]}'
+
+    def __lt__(self, other):
+        if isinstance(other, Student):
+            print('Not a Student!')
+            return
+        return f' {self.student._average_s()} < {other.student1._average_s()}'
+
 
 
 class Mentor:
@@ -57,6 +64,13 @@ class Lecturer(Mentor):
         return f'\nИмя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self._average_l()}' \
                f'\nЧитает лекции по курсу: {self.courses_in_progress[0]}'
 
+    def __lt__(self, other):
+        if isinstance(other, Lecturer):
+            print('Not a Lecturer!')
+            return
+        return f' {self.lecturer._average_s()} < {other.lecturer1._average_s()}'
+
+
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
         if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress:
@@ -71,27 +85,25 @@ class Reviewer(Mentor):
         return f'\nИмя: {self.name}\nФамилия: {self.surname}'
 
 
-
-
 cool_mentor = Mentor('Some', 'Buddy')
-# cool_mentor.courses_attached += ['Python']
+cool_mentor.courses_attached += ['Python']
 
-student1 = Student('Bobby', 'Ozzy', 'your_gender')
+student1 = Student('Bobby', 'Ozzy',  7.3)
 student1.courses_in_progress += ['Python', 'Git']
 student1.courses_attached += ['Python']
 student1.finished_courses += ['Введение в программирование']
-student = Student('Rio', 'Eman', 'your_gender')
+student = Student('Rio', 'Eman', 10.0)
 student.courses_in_progress += ['Python', 'Git']
 student.courses_attached += ['Python']
 student.finished_courses += ['Введение в программирование']
-some_student = student1
-student1.__lt__(student)
+some_student = student
 
-lecturer1 = Lecturer('Roy', 'Jones')
+
+lecturer1 = Lecturer('Roy', 'Jones', )
 lecturer1.courses_in_progress += ['Git']
-lecturer = Lecturer('Jone', 'Simse')
+lecturer = Lecturer('Jone', 'Simse', )
 lecturer.courses_in_progress += ['Python']
-some_lecturer = lecturer1
+some_lecturer = lecturer
 
 student.rate_lectures(lecturer, 'Python', 7)
 student.rate_lectures(lecturer, 'Python', 9)
@@ -111,11 +123,12 @@ n_reviewer.rate_hw(student1, 'Python', 6)
 n_reviewer.rate_hw(student1, 'Python', 7)
 n_reviewer.rate_hw(student1, 'Python', 9)
 
-
-# print('Рецензент:', some_reviewer,'\n')
+print('Рецензент:', some_reviewer,'\n')
 print('Лектор:', some_lecturer, '\n')
-print('Студент:', some_student,'\n')
-# lecturer.__lt__(lecturer1)
-# print(average1 > average)
-print(student.grades)
-print(student1.grades)
+print('Студент:', some_student, '\n')
+
+student._average_s().__lt__(student1._average_s())
+print(f' {student.name} {student._average_s()} >  {student1.name} {student1._average_s()}')
+
+lecturer._average_l().__lt__(lecturer1._average_l())
+print(f' {lecturer.name} {lecturer._average_l()} >  {lecturer1.name} {lecturer1._average_l()}')
