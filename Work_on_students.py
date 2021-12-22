@@ -109,6 +109,11 @@ class Reviewer(Mentor):
 cool_mentor = Mentor('Some', 'Buddy')
 cool_mentor.courses_attached += ['Python']
 
+
+student2 = Student('Alex', 'Jackson', 'your_gender')
+student2.courses_in_progress += ['Python', 'Git']
+student2.courses_attached += ['Git', 'Python']
+student2.finished_courses += ['Введение в программирование']
 student1 = Student('Bobby', 'Ozzy', 'your_gender')
 student1.courses_in_progress += ['Python', 'Git']
 student1.courses_attached += ['Git', 'Python']
@@ -118,7 +123,7 @@ student.courses_in_progress += ['Python', 'Git']
 student.courses_attached += ['Git', 'Python']
 student.finished_courses += ['Введение в программирование']
 some_student = student
-student_grade_hw = student.grades, student1.grades
+student_grade_hw = student.grades, student1.grades, student2.grades
 
 
 lecturer1 = Lecturer('Roy', 'Jones', 'age' )
@@ -130,7 +135,7 @@ lecturer.courses_attached += ['Git', 'Python']
 some_lecturer = lecturer
 lecturer_grade_hw = lecturer.grades, lecturer1.grades
 student.rate_lectures(lecturer, 'Git', 9)
-student.rate_lectures(lecturer, 'Git', 8)
+student.rate_lectures(lecturer, 'Git', 9)
 student.rate_lectures(lecturer, 'Git', 5)
 student.rate_lectures(lecturer1, 'Git', 10)
 student.rate_lectures(lecturer1, 'Git', 9)
@@ -146,15 +151,22 @@ n_reviewer = Reviewer('Jonas', 'Bobby')
 n_reviewer.courses_attached += ['Python', 'Git']
 some_reviewer = n_reviewer
 
+n_reviewer.rate_hw(student2, 'Python', 10)
+n_reviewer.rate_hw(student2, 'Python', 9)
+n_reviewer.rate_hw(student2, 'Python', 8)
+n_reviewer.rate_hw(student2, 'Git', 8)
+n_reviewer.rate_hw(student2, 'Git', 9)
+n_reviewer.rate_hw(student2, 'Git', 8)
+
 n_reviewer.rate_hw(student, 'Python', 10)
 n_reviewer.rate_hw(student, 'Python', 10)
 n_reviewer.rate_hw(student, 'Python', 10)
 n_reviewer.rate_hw(student, 'Git', 8)
+n_reviewer.rate_hw(student, 'Git', 9)
 n_reviewer.rate_hw(student, 'Git', 8)
-n_reviewer.rate_hw(student, 'Git', 8)
-n_reviewer.rate_hw(student1, 'Python', 9)
-n_reviewer.rate_hw(student1, 'Python', 9)
-n_reviewer.rate_hw(student1, 'Python', 9)
+n_reviewer.rate_hw(student1, 'Python', 1)
+n_reviewer.rate_hw(student1, 'Python', 1)
+n_reviewer.rate_hw(student1, 'Python', 1)
 n_reviewer.rate_hw(student1, 'Git', 8)
 n_reviewer.rate_hw(student1, 'Git', 8)
 n_reviewer.rate_hw(student1, 'Git', 8)
@@ -165,14 +177,21 @@ print('Лектор:', some_lecturer, '\n')
 print('Студент:', some_student, '\n')
 
 # Задача 3.2 //Сравнение студентов и лекторов по средней оценке через операторы сравнения//
-print(student._average_s() > student1._average_s())
 student._average_s().__lt__(student1._average_s())
 print(f'{student._average_s()} > {student1._average_s()}')
-print(lecturer._average_l() < lecturer1._average_l())
-lecturer._average_l().__lt__(lecturer1._average_l())
-print(f'{lecturer._average_l()} < {lecturer1._average_l()}')
+print(student._average_s() > student1._average_s())
+print(f'{student1._average_s()} > {student2._average_s()}')
+student1._average_s().__lt__(student2._average_s())
+print(student1._average_s() > student2._average_s())
+print(f'{student._average_s()} > {student2._average_s()}')
+student._average_s().__lt__(student2._average_s())
+print(student._average_s() > student2._average_s())
 
+
+lecturer._average_l().__lt__(lecturer1._average_l())
+print(f'\n{lecturer._average_l()} < {lecturer1._average_l()}')
+print(lecturer._average_l() < lecturer1._average_l())
 # Задача 4 // Средние оценки лекторов //
-print(st_gr_hw(student_grade_hw))
+print('\n', st_gr_hw(student_grade_hw))
 print(lt_gr_hw(lecturer_grade_hw))
 
