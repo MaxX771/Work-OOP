@@ -187,11 +187,11 @@ print(f'{student._average_s()} > {student2._average_s()}')
 student._average_s().__lt__(student2._average_s())
 print(student._average_s() > student2._average_s())
 
-
 lecturer._average_l().__lt__(lecturer1._average_l())
 print(f'\n{lecturer._average_l()} < {lecturer1._average_l()}')
 print(lecturer._average_l() < lecturer1._average_l())
-# Задача 4 // Средние оценки лекторов //
-print('\n', st_gr_hw(student_grade_hw))
+
+# Задача 4 // Средние оценки лекторов // Студентов
+print(st_gr_hw(student_grade_hw))
 print(lt_gr_hw(lecturer_grade_hw))
 
